@@ -1,0 +1,106 @@
+body {
+   color: rgba(0,0,0,0.87);
+   font-family: Roboto, Helvetica, Arial, sans-serif;
+   margin: 0;
+   padding: 0;
+ }
+
+/*pタグの上下感覚を調整*/
+ p{
+   margin-top: 3px;
+   margin-bottom: 3px;
+ }
+h1{
+  font-weight: bolder;
+　font-size: 2.5rem;
+　background: red;}
+
+ #title{
+   left: 3%;
+   position: absolute;
+   font-weight: bolder;
+   font-size: 2.5rem;
+   background: red;
+}
+
+/*メニューバー*/
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+  background: black;
+}
+li {
+	float: left;
+}
+li a {
+	display: block;
+	color: black;
+	text-align: center;
+	padding: 0px 5px;
+	text-decoration: none;
+  font-weight: bolder;
+}
+li a:hover:not(.active) {
+	background-color: #ff0000;
+}
+
+
+ #back_button{
+   top:  50%;
+   left: 5%;
+   position: absolute;
+   font-weight: bolder;
+   font-size: 2.5rem;
+   background: red;
+ }
+
+ #next_button{
+   top: 50%;
+   right: 5%;
+   position: absolute;
+   font-weight: bolder;
+   font-size: 2.5rem;
+   background: red;
+ }
+
+ .contents{
+   /*ここで中央揃えにしてる*/
+   top: 50%;
+   margin-left: auto;
+   margin-right: auto;
+   width: 70%;
+   height: auto;
+   display: flex;
+   align-items: flex-start;
+ }
+
+ .contents_tytle{
+   font-size: 5rem;
+   font-weight: bolder;
+ }
+
+ .image_view{
+   margin-left: auto;
+   margin-right: auto;
+   width:   65%;
+   height:  auto;
+   background: red; /*わかりやすくするための確認用*/
+ }
+
+ .record{
+   font-weight: bolder;
+   width:   35%;
+   height:  auto;
+   background: red;
+ }
+
+ #Day{
+   font-size: 2.5rem;
+ }
+
+ #img{
+   width: 100%;
+   height: 100%;
+ }
