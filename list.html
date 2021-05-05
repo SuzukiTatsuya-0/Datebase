@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>赤</title>
+    <link rel="stylesheet" href="list.css">
+    <script type="text/javascript" src="javascript/sketch.js"></script>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.4.1/firebase-app.js"></script>
+    <script defer src="/__/firebase/8.4.1/firebase-firestore.js"></script>
+    <!--
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  </head>
+  <body>
+
+    <!-- ここに、webにどう表示させるか書き込む -->
+<header>
+<h1>赤</h1>
+<nav>
+<ul>
+<li><a href="index.html">top</a></li>
+<li><a href="list.html">list</a></li>
+</ul>
+</nav>
+</header>
+
+    <div id="data_view">
+
+
+
+    <form>
+    <button id="readData" type="button">参照</button><br>
+    </form>
+　　<div id="msg"></div>
+
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+
+    <script>
+
+      // データのやりとり関連はここの<script>間でいじる
+
+      // ここで読み込むfirebaseの住所を取得。
+    firebaseConfig = {
+    apiKey: "AIzaSyAG9hpP4SY82XMNuuoUgeVBl42NB1l6POY",
+    authDomain: "tsuzuki-b6630.firebaseapp.com",
+    projectId: "tsuzuki-b6630",
+    storageBucket: "tsuzuki-b6630.appspot.com",
+    messagingSenderId: "485716304046",
+    appId: "1:485716304046:web:23b2e3ecc078505813cd3f",
+    measurementId: "G-Z6H2N34G2E"
+  };
+      // firebaseのどの機能を使うか指定
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+
+      //　ここで自分のfirebasestoreを参照する
+      var db = firebase.firestore();
+
+//こっから先わかんねー！
+      var LIST = [];  //ID保管用
+
+      //　ここでfirestoreにあるデータを取得する
+      window.onload = function(){
+        db.collection("users")
+//並び替えのやつ
+        .orderBy("Record_number", "asc")
+//getメソッド
+        .get().then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+              //console.log(doc.id, " => ", doc.data());
+              var data = doc.data();
+              LIST.push(data);
+
+              //　ここで要素数を取得している　何のために？
+              const elements_number = LIST.length - 1;
+              console.log(elements_number);
+
+          });
+      });
+
+    }
+
+//配列をループとか？
+
+
+      document.querySelector("#readData").addEventListener("click", ()=>{
+      db.collection("users").orderBy("Record_number", "asc").get().then((querySnapshot) => {
+      var buff = [];
+      var html = "<ul>";
+      querySnapshot.forEach((doc) => {
+      var data = doc.data();
+      html += `<li>${data.Record_number}, ${data.Category},${data.Name},</li>`;
+      buff.push(doc.id);
+      });
+      html += "</ul>";
+      LIST = buff;
+      showMessage(html);
+      })
+      .catch((error)=>{
+      showMessage(`データの取得に失敗しました (${error})`);
+      });
+      });
+
+      function showMessage(str){
+      var msg = document.querySelector("#msg");
+      msg.innerHTML = str;
+      msg.style.display = "block";
+      }
+
+
+    </script>
+
+
+  </body>
+</html>
